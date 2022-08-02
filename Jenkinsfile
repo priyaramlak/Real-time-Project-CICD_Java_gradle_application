@@ -1,19 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('sonar quality check') {
             agent {
                 docker {
-                    image 'gradle:6.7-jdk11'
-                    // Run the container on the node specified at the
-                    // top-level of the Pipeline, in the same workspace,
-                    // rather than on a new node entirely:
-                    reuseNode true
+                    image 'openjdk:11'
                 }
             }
             steps {
-                sh 'gradle --version'
-            }
+                withSonarQubeEnv(credentialsId: 'sonar-token'){
+                    sh 'chmod +x gradlew'
+                    sh './gradlew sonarqube'
+            }   }
         }
     }
 }
