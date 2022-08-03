@@ -44,5 +44,3 @@ pipeline{
         }
     }
 }   
-=======
->>>>>>> 3d2a9fd40c5b829de80e177b1cd5d8de0ceb675f
